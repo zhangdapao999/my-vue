@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02_计算属性</title>
+    <script src="../00_static/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        全名:{{userInfo.firstName + userInfo.lastName}}
+        <br>
+        全名:{{fullName}}
+        <br>
+        <button @click="num++">{{num}}</button> X <button @click="num2++">{{num2}}</button> = <span>{{result}}</span>
+    </div>
+
+    <script setup>
+        const { createApp, ref, reactive, computed } = Vue
+
+        const app = createApp({
+            setup() {
+
+                // const userInfo = ref({
+                //     firstName: '张',
+                //     lastName: '大炮'
+                // })
+                const userInfo = reactive({
+                    firstName: '张',
+                    lastName: '大炮'
+                })
+
+                // 计算属性
+                const fullName = computed(function () {
+                    return userInfo.firstName + userInfo.lastName
+                })
+
+                // 计算加法
+                const num = ref(0)
+                const num2 = ref(0)
+
+                const result = computed(() => {
+                    return num.value * num2.value
+                })
+
+                return {
+                    userInfo,
+                    fullName,
+                    num,
+                    num2,
+                    result
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+
+
+</body>
+
+</html>

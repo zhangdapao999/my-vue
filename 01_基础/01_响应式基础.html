@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_响应式基础</title>
+    <script src="../00_static/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{name}} - {{gender}} - <span @click="age++">{{age}}</span>
+        <br>
+        {{userInfo.id}} - {{userInfo.name}} - <span @click="userInfo.age++">{{userInfo.age}}</span> - {{userInfo.hobby}}
+    </div>
+
+    <script setup>
+        const { createApp, ref } = Vue
+
+        const app = createApp({
+            setup() {
+                const name = '张三丰'
+                const gender = ref('男')
+                const age = ref(0)
+                const userInfo = ref({
+                    id: 1,
+                    name: '张无忌',
+                    age: 23,
+                    hobby: [
+                        {
+                            id: 1,
+                            value: '杀人'
+                        },
+                        {
+                            id: 2,
+                            value: '放火'
+                        }
+                    ]
+                })
+                return {
+                    name,
+                    gender,
+                    age,
+                    userInfo
+                }
+            }
+        })
+
+        app.mount('#app')
+    </script>
+
+
+</body>
+
+</html>
